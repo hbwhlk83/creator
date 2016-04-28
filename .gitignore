@@ -16,6 +16,7 @@ bin/
 gen/
 obj/
 lib/
+pdb/
 
 # svn files
 .svn/
