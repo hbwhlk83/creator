@@ -47,15 +47,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_coreplugin.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="ActionManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ActionManager.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ActionManager.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core_global.h">
@@ -70,9 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="coreplugin.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ActionManager.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

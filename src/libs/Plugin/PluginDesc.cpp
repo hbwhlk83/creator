@@ -11,9 +11,9 @@
 
 namespace {
 	const char PLUGIN_METADATA[] = "MetaData";
-	const char PLUGIN_NAME[] = "name";
-	const char PLUGIN_VERSION[] = "version";
-	const char PLUGIN_DISABLED_BY_DEFAULT[] = "DisabledByDefault";
+	const char PLUGIN_NAME[] = "Name";
+	const char PLUGIN_VERSION[] = "Version";
+	const char PLUGIN_ENABLE_BY_DEFAULT[] = "DefaultEnable";
 }
 
 
@@ -57,7 +57,6 @@ bool PluginDesc::readMetaData(const QJsonObject &metaData) {
 	if (!value.isString()) {
 		return false;
 	}
-
 	if (value.toString() != PluginManager::pluginIID()) {
 		qWarning() << "Plugin ignored (IID does not match)";
 		return false;
@@ -66,30 +65,42 @@ bool PluginDesc::readMetaData(const QJsonObject &metaData) {
 	value = metaData.value(QLatin1String(PLUGIN_METADATA));
 	if (!value.isObject()) {
 		qWarning() << "Plugin meta data not found";
-		return true;
+		return false;
 }
 	QJsonObject pluginInfo = value.toObject();
 
 	value = pluginInfo.value(QLatin1String(PLUGIN_NAME));
-	if (value.isUndefined())
-		return true;
-	if (!value.isString())
-		return true;
+	if (value.isUndefined()) {
+		qWarning() << "Plugin Name Undefined";
+		return false;
+	}
+	if (!value.isString()) {
+		qWarning() << "Plugin Name value is't String";
+		return false;
+	}
 	mName = value.toString();
 
 	value = pluginInfo.value(QLatin1String(PLUGIN_VERSION));
-	if (value.isUndefined())
-		return true;
-	if (!value.isString())
-		return true;
+	if (value.isUndefined()) {
+		qWarning() << "Plugin Version Undefined";
+		return false;
+	}
+	if (!value.isString()) {
+		qWarning() << "Plugin Version value is't String";
+		return false;
+	}
 	mVersion = value.toString();
-	if (!isValidVersion(mVersion))
-		return true;
+	if (!isValidVersion(mVersion)) {
+		qWarning() << "Plugin Version is't Valid";
+		return false;
+	}
 
-	value = pluginInfo.value(QLatin1String(PLUGIN_DISABLED_BY_DEFAULT));
-	if (!value.isUndefined() && !value.isBool())
-		return true;
-	mEnabledByDefault = !value.toBool(false);
+	value = pluginInfo.value(QLatin1String(PLUGIN_ENABLE_BY_DEFAULT));
+	if (!value.isUndefined() && !value.isBool()) {
+		qWarning() << "Plugin Enable Undefined or is't Bool";
+		return false;
+	}
+	mEnabledByDefault = value.toBool(true);
 
 	return true;
 }
@@ -118,4 +129,8 @@ bool PluginDesc::loadPlugin() {
 	mPlugin->initialize();
 
 	return true;
+}
+
+bool PluginDesc::unloadPlugin() {
+	return loader.unload();
 }

@@ -13,7 +13,6 @@ ActionManager* ActionManager::instance() {
 	if (mInstance == nullptr) {
 		mInstance = new ActionManager();
 	}
-
 	return mInstance;
 }
 
@@ -27,7 +26,6 @@ void ActionManager::deleteInstance() {
 
 ActionManager::ActionManager(QObject* parent /*= nullptr*/) :
 	QObject(parent) {
-
 }
 
 ActionManager::~ActionManager() {
@@ -54,38 +52,21 @@ QMenuBar* ActionManager::createMenuBar(const QString& name) {
 	return meubar;
 }
 
-QAction* ActionManager::createAction(const QString& name, const QIcon &icon, const QString &text, QObject* parent/* = 0*/) {
+QAction* ActionManager::createAction(const QString& name, QObject* parent/* = 0*/) {
 	QAction* act = 0;
 	act = action(name);
 	if (act == 0) {
-		act = new QAction(icon, text, parent);
+		act = new QAction(parent);
 		mActios.insert(name, act);
 	}
 	return act;
 }
 
-QActionGroup* ActionManager::createActionGroup(const QString& name, QObject* parent/* = 0*/) {
-	QActionGroup* actgp = 0;
-	actgp = actiongroup(name);
-	if (actgp == 0) {
-		actgp = new QActionGroup(parent);
-		mActionGroups.insert(name, actgp);
-	}
-	return actgp;
-}
-
-QActionGroup* ActionManager::createActionGroup(const QString& name, QAction* act, QObject* parent /*= 0*/) {
-	QActionGroup* actgp = createActionGroup(name, parent);
-	actgp->addAction(act);
-	return actgp;
-}
-
-QActionGroup* ActionManager::createActionGroup(const QString& name, QList<QAction*> acts, QObject* parent /*= 0*/) {
-	QActionGroup* actgp = createActionGroup(name, parent);
-	foreach(QAction* act, acts)	{
-		actgp->addAction(act);
-	}
-	return actgp;
+QAction* ActionManager::createSeparator(const QString& name, QObject* parent /*= 0*/) {
+	QAction* act = createAction(name, parent);
+	if (act != 0)
+		act->setSeparator(true);
+	return act;
 }
 
 QMenu* ActionManager::menu(const QString& name) const {
@@ -112,13 +93,31 @@ QAction* ActionManager::action(const QString& name) const {
 	return 0;
 }
 
-QActionGroup* ActionManager::actiongroup(const QString& name) const {
-	const strCmdGropMap::const_iterator iter = mActionGroups.constFind(name);
-	if (iter != mActionGroups.constEnd()) {
-		return iter.value();
-	}
-	return 0;
+void ActionManager::appengGroup(const QString& groupname) {
+	mGroups.append(Group(groupname));
 }
+
+void ActionManager::insertGroup(const QString& before, const QString& group) {
+	QList<Group>::iterator it = mGroups.begin();
+	while (it != mGroups.end()) {
+		if (it->mName == before) {
+			mGroups.insert(it, Group(group));
+			break;
+		}
+		++it;
+	}
+}
+
+void ActionManager::addAction(const QAction* act, const QString& groupname) {
+	if (!act || groupname.isEmpty()) {
+		return;
+	}
+
+
+}
+
+
+
 
 
 

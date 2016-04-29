@@ -13,6 +13,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Plugin", "src\libs\Plugin\Plugin.vcxproj", "{BB6137DA-3031-4F11-886A-99F20E2E61DF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "core", "src\plugins\core\core.vcxproj", "{82CCB48F-7145-4945-976C-CE20A5E70437}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BB6137DA-3031-4F11-886A-99F20E2E61DF} = {BB6137DA-3031-4F11-886A-99F20E2E61DF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

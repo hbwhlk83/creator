@@ -6,6 +6,7 @@
     <LibDir>$(SolutionDir)lib\$(Configuration)\</LibDir>
     <ObjDir>$(SolutionDir)obj\$(Configuration)\$(ProjectName)\</ObjDir>
     <PdbDir>$(SolutionDir)pdb\$(Configuration)\</PdbDir>
+    <PluginDir>$(SolutionDir)bin\$(Configuration)\Plugins</PluginDir>
   </PropertyGroup>
   <PropertyGroup>
     <LinkIncremental>true</LinkIncremental>
@@ -51,6 +52,10 @@
     </BuildMacro>
     <BuildMacro Include="PdbDir">
       <Value>$(PdbDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="PluginDir">
+      <Value>$(PluginDir)</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
   </ItemGroup>

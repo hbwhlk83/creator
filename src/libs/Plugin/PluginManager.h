@@ -65,6 +65,9 @@ public:
 
 	void loadPlugins();
 
+	void loadPlugin(const QString& plugin);
+	void unloadPlugin(const QString& name);
+
 	QObject *getObjectByName(const QString &name);
 	QObject *getObjectByClassName(const QString &className);
 

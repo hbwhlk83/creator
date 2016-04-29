@@ -1,5 +1,5 @@
 {
  	"Name" : "Core",
-  "Version" : "4.0.82", 
-	"defaultEnable": true 
+  "Version" : "1.0.0", 
+	"DefaultEnable": true
 }

@@ -24,7 +24,7 @@ static inline QStringList getPluginPaths()
 	else {
 		// 2) "plugins" (Win/Linux)
 		pluginPath = rootDirPath;
-		pluginPath += QLatin1String("/Debug");
+		pluginPath += QLatin1String("/Debug/Plugins");
 		rc.push_back(pluginPath);
 	}
 

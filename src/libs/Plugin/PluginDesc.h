@@ -26,6 +26,7 @@ public:
 	IPlugin* plugin() const { return mPlugin; }
 
 	bool loadPlugin();
+	bool unloadPlugin();
 
 protected:
 	bool readMetaData(const QJsonObject &metaData);

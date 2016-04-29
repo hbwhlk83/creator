@@ -4,7 +4,7 @@
 #include <QMenu>
 #include <QMenuBar>
 
-#include "ActionManager.h"
+#include "utils/ActionManager/ActionManager.h"
 #include "coreconstans.h"
 #include "MainWindow.h"
 
@@ -40,40 +40,4 @@ void MainWindow::restoreWindowState(){
 void MainWindow::registerDefaultContainers() {
 	mainMenuBar = mActionManager->createMenuBar(CoreConstants::MENU_BAR);
 	setMenuBar(mainMenuBar);
-
-	QMenu* menu = mActionManager->createMenu(CoreConstants::M_FILE);
-	menu->setTitle("&File");
-	mainMenuBar->addMenu(menu);
-
-	QMenu* submenu = mActionManager->createMenu(CoreConstants::G_FILE_NEW);
-	submenu->setTitle("&New");
-	menu->addMenu(submenu);
-
-	submenu = mActionManager->createMenu(CoreConstants::G_FILE_OPEN);
-	submenu->setTitle("&Open");
-	menu->addMenu(submenu);
-
-	submenu = mActionManager->createMenu(CoreConstants::G_FILE_SAVE);
-	submenu->setTitle("&Save");
-	menu->addMenu(submenu);
-
-	submenu = mActionManager->createMenu(CoreConstants::G_FILE_OTHER);
-	submenu->setTitle("&Other");
-	menu->addMenu(submenu);
-
-	submenu = mActionManager->createMenu(CoreConstants::G_FILE_CLOSE);
-	submenu->setTitle("&Close");
-	menu->addMenu(submenu);
-
-	menu = mActionManager->createMenu(CoreConstants::M_EDIT);
-	menu->setTitle("&Edit");
-	mainMenuBar->addMenu(menu);
-
-	menu = mActionManager->createMenu(CoreConstants::M_TOOLS);
-	menu->setTitle("&Tool");
-	mainMenuBar->addMenu(menu);
-
-	menu = mActionManager->createMenu(CoreConstants::M_HELP);
-	menu->setTitle("&Help");
-	mainMenuBar->addMenu(menu);
 }

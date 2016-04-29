@@ -154,5 +154,23 @@ void PluginManager::deleteInstance() {
 	}
 }
 
+void PluginManager::loadPlugin(const QString& plugin) {
+	PluginDesc* spec = new PluginDesc;
+	if (!spec->read(plugin)) {
+		delete spec;
+	}
+	mPlugins.append(spec);
+	spec->loadPlugin();
+}
+
+void PluginManager::unloadPlugin(const QString& name) {
+	PluginDesc* spec = pluginByName(name);
+	if (spec != 0) {
+		spec->unloadPlugin();
+	}
+}
+
+
+
 
 
